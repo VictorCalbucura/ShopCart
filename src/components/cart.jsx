@@ -3,11 +3,11 @@ import './Cart.css';
 import { CartContext } from '../contexts/CartContext';
 
 export default function Cart() {
-  const { cart, clearCart } = useContext(CartContext);
+  const { cart, clearCart, addToCart, removeFromCart, count } = useContext(CartContext);
 
   return (
     <>
-      <label className='cart-button' htmlFor='cart'> 🛒 </label>
+      <label className='cart-button' htmlFor='cart'> 🛒 {count} </label>
       <input id='cart' type='checkbox' hidden />
 
       <aside className='cart'>
@@ -21,8 +21,9 @@ export default function Cart() {
               </div>
 
               <footer>
+                <button onClick={() => removeFromCart(product)}>X</button>
                 <small>Quantity: {product.quantity}</small>
-                <button>+</button>
+                <button onClick={() => addToCart(product)}>+</button>
               </footer>
             </li>
           ))}
